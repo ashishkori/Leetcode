@@ -12,34 +12,31 @@
 class Solution {
 public:
     vector<vector<int>> verticalTraversal(TreeNode* root) {
-        vector<vector<int>>ans;
-        map<int,map<int,multiset<int>>> res;
-        queue<pair<TreeNode *,pair<int,int>>> qu;
-        qu.push({root,{0,0}});
-        while(!qu.empty()) {
-            auto t=qu.front();
-            qu.pop();
-            TreeNode* node = t.first;
-            int ver = t.second.first;
-            int lvl = t.second.second;
-            //cout<<"inserting "<< node->val <<endl; 
-            res[ver][lvl].insert(node->val);
-            if(node->left) {
-                qu.push({node->left,{ver-1,lvl+1}});
-            } 
-            if(node->right) {
-                qu.push({node->right,{ver+1,lvl+1}});
+        map<int,map<int,multiset<int>>>nodes;
+        queue<pair<TreeNode*,pair<int,int>>>todo;
+        todo.push({root,{0,0}});
+        while(!todo.empty()){
+            auto p=todo.front();
+            todo.pop();
+            TreeNode *node=p.first;
+            int x=p.second.first,y=p.second.second;
+            nodes[x][y].insert(node->val);
+            if(node->left){
+                todo.push({node->left,{x-1,y+1}});
             }
+            if(node->right){
+                todo.push({node->right,{x+1,y+1}});
+            }
+
         }
-        for(auto tmp:res) {
+        vector<vector<int>>ans;
+        for(auto p:nodes){
             vector<int>col;
-            for(auto q:tmp.second) {
-             //   cout<< q.second.size()<<endl;
-                col.insert(col.end(), q.second.begin(),q.second.end());
+            for(auto q:p.second){
+                col.insert(col.end(),q.second.begin(),q.second.end());
             }
             ans.push_back(col);
         }
-    return ans;
-
+        return ans;
     }
 };
