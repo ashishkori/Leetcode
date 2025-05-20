@@ -7,7 +7,7 @@ public:
         for(int i=0; i<n; i++)
         {
             // mp.count() will tell whatever ith index that I want, have I seen it before?
-            if(mp.count(nums[i]))
+            if(mp.find(nums[i])!= mp.end())
             {
                 // if I have already seen this number, then check for condition abs(i - j) <= k
                 if(abs(i-mp[nums[i]])<=k)
