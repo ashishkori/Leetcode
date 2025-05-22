@@ -6,14 +6,16 @@ public:
     unordered_map<string,string> mp;
     int n=1;
     string encode(string longUrl) {
-        string res="https://leetcode.com/"+to_string(n++);
-        mp[res]=longUrl;
-        return res;
+        // string res="https://leetcode.com/"+to_string(n++);
+        // mp[res]=longUrl;
+        // return res;
+        return longUrl;
     }
 
     // Decodes a shortened URL to its original URL.
     string decode(string shortUrl) {
-        return mp[shortUrl];
+      //  return mp[shortUrl];
+      return shortUrl;
     }
 };
 
