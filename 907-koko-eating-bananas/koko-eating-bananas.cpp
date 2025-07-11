@@ -2,8 +2,9 @@ class Solution {
 public:
     unsigned int calH(vector<int>& piles, int h) {
         unsigned int res=0;
-        for(double x:piles) {
-            res = res + ceil(x/h);
+        for(auto x:piles) {
+            res +=x/h;
+            if(x%h) res++;
         }
         return res;
     } 
