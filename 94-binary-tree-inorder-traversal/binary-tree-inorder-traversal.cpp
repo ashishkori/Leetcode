@@ -16,12 +16,10 @@ public:
         inOrder(root->left, result);
         result.push_back(root->val);
         inOrder(root->right, result);
-
     }
     vector<int> inorderTraversal(TreeNode* root) {
        vector<int> res;
        inOrder(root,res);
        return res;
-
     }
 };
