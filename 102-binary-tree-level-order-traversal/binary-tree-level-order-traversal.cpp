@@ -11,29 +11,23 @@
  */
 class Solution {
 public:
-    void solve(TreeNode *root, vector<vector<int>>& res) {
-        if(!root) return;
-        queue<TreeNode*>q; 
-        q.push(root);
-        
-        while(!q.empty()) {
-            int size= q.size();
-            vector<int> lev;
-            for(int i=0;i<size;i++) {
-                TreeNode *tmp = q.front();
-                q.pop();
-                if(tmp->left) q.push(tmp->left);
-                if(tmp->right) q.push(tmp->right);
-                lev.push_back(tmp->val);
-            }
-            res.push_back(lev);
-           // lev.clear();
-        }
-
-    }
     vector<vector<int>> levelOrder(TreeNode* root) {
-        vector<vector<int>> res;
-        solve(root, res);
-        return res;
+        vector<vector<int>> result;
+        queue<TreeNode*> qu;
+        qu.push(root);
+        while(!qu.empty()) {
+            int n = qu.size();
+            vector<int> tmp;
+            for(int i=0;i<n;i++) {
+                TreeNode *curr = qu.front();
+                qu.pop();
+                if(curr==nullptr) continue;
+                tmp.push_back(curr->val);
+                if(curr->left) qu.push(curr->left);
+                if(curr->right) qu.push(curr->right);
+            }
+            if(!tmp.empty()) result.push_back(tmp);
+        }
+        return result;
     }
 };
