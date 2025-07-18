@@ -14,8 +14,7 @@ public:
     void inOrder(TreeNode* root, int &k, int &result) {
         if(root == nullptr) return;
         inOrder(root->left,k,result);
-        --k;
-        if(!k) result = root->val;
+        if(!(--k)) result = root->val;
         inOrder(root->right,k,result);
     }
     int kthSmallest(TreeNode* root, int k) {
