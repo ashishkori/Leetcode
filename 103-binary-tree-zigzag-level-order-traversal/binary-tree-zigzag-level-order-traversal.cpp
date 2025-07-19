@@ -19,15 +19,17 @@ public:
         bool dir=false;
         while(!qu.empty()) {
             int n = qu.size();
-            vector<int> level;
+            vector<int> level(n,0);
             for(int i=0;i<n;i++) {
                 TreeNode* curr=qu.front();
-                level.push_back(curr->val);
+                int index=dir?n-i-1:i;
+                level[index]=curr->val;
                 qu.pop();
+                
                 if(curr->left) qu.push(curr->left);
                 if(curr->right) qu.push(curr->right);
             }
-            if(dir) reverse(level.begin(),level.end());
+           // if(dir) reverse(level.begin(),level.end());
             result.push_back(level);
             dir=!dir;
         }
