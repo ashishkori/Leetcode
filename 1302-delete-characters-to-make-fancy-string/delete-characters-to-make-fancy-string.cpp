@@ -7,24 +7,24 @@ public:
         }
         
         // Result string to build our fancy string
-        string result = "";
-        
+        string result = s.substr(0,2);
+        int j=result.size()-1;
         // Iterate through each character in the input string
-        for (int i = 0; i < s.length(); i++) {
+        for (int i = 2; i < s.length(); i++) {
             // Get the current character
             char currentChar = s[i];
             
             // Check if adding this character would create three consecutive identical characters
             // We need at least 2 characters in result to make this check
-            if (result.length() >= 2 && 
-                result[result.length() - 1] == currentChar && 
-                result[result.length() - 2] == currentChar) {
+            
+            if(result[j] == result[j-1] && result[j] == currentChar) {
                 // Skip this character because it would create three consecutive identical characters
                 continue;
             }
             
             // Safe to add this character - it won't create three consecutive identical characters
             result += currentChar;
+            j++;
         }
         
         return result;
