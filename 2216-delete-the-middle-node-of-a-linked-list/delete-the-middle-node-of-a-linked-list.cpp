@@ -15,15 +15,12 @@ public:
         ListNode* fast=head;
         ListNode* prev;
         if(!head->next) return nullptr;
-        //if(head==nullptr) return false;
         while(fast && fast->next) {
             prev=slow;
             slow=slow->next;
             fast=fast->next->next; 
         }
-        //ListNode *tmp=slow;
         if(prev) prev->next=slow->next;
-        
         delete slow;
         return head;
     }
