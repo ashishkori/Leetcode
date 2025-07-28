@@ -23,8 +23,8 @@ public:
         }
         //ListNode *tmp=slow;
         if(prev) prev->next=slow->next;
-        else delete slow;
-        //delete tmp;
+        
+        delete slow;
         return head;
     }
 };
