@@ -14,7 +14,7 @@ public:
                 if(coin[0]>0&&coin[1]>0) {
                     coin[0]--;
                     coin[1]--;
-                    coin[2]++;
+                  //  coin[2]++;
                 } else if(coin[0]>=3) {
                     coin[0]-=3;
                 } else return false;
