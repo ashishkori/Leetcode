@@ -8,9 +8,9 @@ public:
             vector<int> curr=intervals[i];
             int last=result.back()[1];
             if(last>=curr[0]) {
-                int start = result.back()[0];
-                result.pop_back();
-                result.push_back({start,max(curr[1],last)});
+               // int start = result.back()[0];
+                //result.pop_back();
+                result.back()[1]=max(curr[1],last);
             } else {
                 result.push_back(curr);
             }
