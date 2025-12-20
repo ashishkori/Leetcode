@@ -14,6 +14,20 @@ public:
             tmp.pop_back();
         }
     }
+    void solve1(vector<int>& nums,vector<vector<int>>& res, int idx){
+        if(idx==nums.size()) {
+            res.push_back(nums);
+            return;
+        }
+        set<int> st;
+        for(int i=idx;i<nums.size();i++) {
+            if(st.find(nums[i])!=st.end()) continue;
+            st.insert(nums[i]);
+            swap(nums[idx],nums[i]);
+            solve1(nums,res,idx+1);
+            swap(nums[idx],nums[i]);
+        }
+    }
     vector<vector<int>> permuteUnique(vector<int>& nums) {
         map<int,int> mp;
         vector<vector<int>> res;
@@ -21,7 +35,7 @@ public:
         for(auto x:nums) {
             mp[x]++;
         }
-        solve(mp,res,tmp, nums.size());
+        0?solve(mp,res,tmp, nums.size()):solve1(nums,res,0);
         return res;
     }
 };
