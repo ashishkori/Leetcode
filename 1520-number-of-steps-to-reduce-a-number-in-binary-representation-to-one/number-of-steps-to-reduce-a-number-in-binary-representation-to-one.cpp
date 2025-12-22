@@ -12,7 +12,7 @@ public:
             s[i]='1';
         }
     }
-    int numSteps(string s) {
+    int numSteps1(string s) {
         //int n=s.size();
         int count=0;
         while(s.size()!=1) {
@@ -26,4 +26,24 @@ public:
         }
         return count;
     }
+
+    int numSteps2(string s) {
+        int i=s.size()-1;
+        int carry=0;
+        int count=0;
+        while(i>0) {
+            int value=s[i]-'0';
+            if((value+carry)%2==1) {
+                count+=2;
+                carry=1;
+            } else {
+                count++;
+            }
+            i--;
+        }
+        return carry+count;
+     }
+     int numSteps(string s) {
+        return 0?numSteps1(s):numSteps2(s);
+     }
 };
