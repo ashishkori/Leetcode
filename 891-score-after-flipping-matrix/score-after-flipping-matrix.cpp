@@ -52,7 +52,7 @@ public:
         return res;
     }
     int matrixScore(vector<vector<int>>& grid) {
-        return 0?matrixScore1(grid):matrixScore2(grid);
+        return 1?matrixScore1(grid):matrixScore2(grid);
     }
 
 };
