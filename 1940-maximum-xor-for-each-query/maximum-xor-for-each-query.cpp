@@ -7,10 +7,9 @@ public:
     }
     int mask=(1<<maximumBit)-1;
     vector<int> res;
-    int n=nums.size();
-    for(int i=0;i<nums.size();i++) {
+    for(int i=nums.size()-1;i>=0;i--) {
         res.push_back(xr^mask);
-        xr^=nums[n-i-1];
+        xr^=nums[i];
     }
     return res;
     }
