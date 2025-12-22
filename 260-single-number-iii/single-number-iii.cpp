@@ -27,12 +27,12 @@ public:
         return i;
     }
     vector<int> singleNumber2(vector<int> &nums) { 
-        int xorn=0;
+        unsigned int xorn=0;
         for(auto x:nums) xorn^=x;
         int xor1=0,xor2=0;
-        int idx=findrSetbiy(xorn);
+        int mask=xorn&(-xorn);
         for(auto x:nums) {
-            if(x&(1<<idx)) {
+            if(x&mask) {
                 xor1^=x;
             } else {
                  xor2^=x;
@@ -43,6 +43,6 @@ public:
     }
 
     vector<int> singleNumber(vector<int> &nums) {
-	return 1?singleNumber1(nums):singleNumber2(nums);
+	return 0?singleNumber1(nums):singleNumber2(nums);
     }
 };
