@@ -24,7 +24,7 @@ public:
         int res=0;
         for(int i=0;i<m;i++) {
             for(int j=0;j<n;j++) {
-               if(grid[i][j]) res+=pow(2,n-j-1)*grid[i][j];
+               res+=pow(2,n-j-1)*grid[i][j];
             }
         }
         return res;
