@@ -43,6 +43,6 @@ public:
     }
 
     vector<int> singleNumber(vector<int> &nums) {
-	return 0?singleNumber1(nums):singleNumber2(nums);
+	return 1?singleNumber1(nums):singleNumber2(nums);
     }
 };
