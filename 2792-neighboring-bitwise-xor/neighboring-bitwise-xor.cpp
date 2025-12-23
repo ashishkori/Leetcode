@@ -1,6 +1,11 @@
 class Solution {
 public:
-    bool doesValidArrayExist(vector<int>& derived) {
+    bool doesValidArrayExist2(vector<int>& derived) { 
+        int res=0;
+        for(auto x:derived) res^=x;
+        return res==0;
+    }
+    bool doesValidArrayExist1(vector<int>& derived) {
         int n=derived.size();
         vector<int>res(n,0);
         res[0]=0;
@@ -17,4 +22,7 @@ public:
         
         return false;
     }
+      bool doesValidArrayExist(vector<int>& derived) {
+       return  0?doesValidArrayExist1(derived):doesValidArrayExist2(derived);
+      }
 };
