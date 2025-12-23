@@ -8,7 +8,7 @@ public:
         num&=(~(1<<c));
     }
     bool isSet(int num, int c) {
-        return ((num>>c)&1)!=0;
+        return ((num)&(1<<c))!=0;
        
     }
 
