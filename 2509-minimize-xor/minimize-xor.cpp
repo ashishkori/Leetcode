@@ -5,10 +5,17 @@ public:
        
     }
     void unset(int &num, int c) {
-        unsigned int i=0;
         num&=(~(1<<c));
     }
-    int minimizeXor(int num1, int num2) {
+    bool isSet(int num, int c) {
+        return ((num>>c)&1 !=0);
+       
+    }
+
+    bool isUnset(int num, int c) {
+        return ((num>>c)&1==0);
+    }
+    int minimizeXor1(int num1, int num2) {
         int res=num1;
         int n2_bit=__builtin_popcount(num2);
         int n1_bit=__builtin_popcount(num1);
@@ -33,4 +40,28 @@ public:
         }
         return res;
     }
+
+    int minimizeXor2(int num1, int num2) {
+        int res=0;
+        int cbit=__builtin_popcount(num2);
+
+        for(int i=31;i>=0 && cbit>0;i--) {
+            if(isSet(num1,i)){
+                set(res,i);
+                cbit--;
+            }
+        }
+        //cout<<"CBIT "<<cbit<<" RES "<<res;
+        for(int i=0;i<32 && cbit>0 ;i++) {
+            if(!isSet(num1,i)){
+              //  cout<<"CBIT "<<cbit<<" RES "<<res;
+                set(res,i);
+                cbit--;
+            }
+        }
+        return res;
+    }
+    int minimizeXor(int num1, int num2) {
+        return 0?minimizeXor1(num1, num2):minimizeXor2(num1, num2);
+     }
 };
