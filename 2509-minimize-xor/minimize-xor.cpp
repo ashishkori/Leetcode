@@ -8,12 +8,12 @@ public:
         num&=(~(1<<c));
     }
     bool isSet(int num, int c) {
-        return ((num>>c)&1);
+        return ((num>>c)&1)!=0;
        
     }
 
     bool isUnset(int num, int c) {
-        return !((num>>c)&1);
+        return ((num)&(1<<c))==0;
     }
     int minimizeXor1(int num1, int num2) {
         int res=num1;
