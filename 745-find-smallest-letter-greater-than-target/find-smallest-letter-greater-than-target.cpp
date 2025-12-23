@@ -23,6 +23,6 @@ public:
     }
     char nextGreatestLetter(vector<char>& letters, char target) {
         
-        return 0?nextGreatestLetter1(letters, target):nextGreatestLetter2(letters, target);
+        return 1?nextGreatestLetter1(letters, target):nextGreatestLetter2(letters, target);
     }
 };
