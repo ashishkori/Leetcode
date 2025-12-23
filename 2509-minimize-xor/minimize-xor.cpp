@@ -8,12 +8,12 @@ public:
         num&=(~(1<<c));
     }
     bool isSet(int num, int c) {
-        return ((num>>c)&1 !=0);
+        return ((num>>c)&1);
        
     }
 
     bool isUnset(int num, int c) {
-        return ((num>>c)&1==0);
+        return !((num>>c)&1);
     }
     int minimizeXor1(int num1, int num2) {
         int res=num1;
@@ -53,7 +53,7 @@ public:
         }
         //cout<<"CBIT "<<cbit<<" RES "<<res;
         for(int i=0;i<32 && cbit>0 ;i++) {
-            if(!isSet(num1,i)){
+            if(isUnset(num1,i)){
               //  cout<<"CBIT "<<cbit<<" RES "<<res;
                 set(res,i);
                 cbit--;
