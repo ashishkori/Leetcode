@@ -13,13 +13,12 @@ public:
         }
         int myLowerBound(vector<int>& nums, int n){
             int l=0;
-            int res=-1;
+           // int res=-1;
             int r=nums.size()-1;
             while(l<=r){
                 int mid = l+(r-l)/2;
                 if(nums[mid]>=n) {
                     r=mid-1;
-                    res=mid;  
                 } else {
                      l=mid+1;
                 }
