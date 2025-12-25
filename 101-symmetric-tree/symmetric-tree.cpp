@@ -11,14 +11,13 @@
  */
 class Solution {
 public:
-    bool isSymmetric(TreeNode* root) {
-        if (root==nullptr) return true;
-        return isMirror(root->left,root->right);
+    bool check(TreeNode* l,TreeNode* r) {
+        if(!l && !r) return true;
+        if(!l || !r) return false;
+
+        return (l->val==r->val && check(l->left,r->right) && check(l->right,r->left));
     }
-    private:
-        bool isMirror(TreeNode *t1, TreeNode *t2) {
-            if(t1==nullptr && t2==nullptr) return true;
-            if(t1==nullptr || t2==nullptr) return false;
-            return (t1->val==t2->val && isMirror(t1->left,t2->right) && isMirror(t1->right,t2->left));
-        }
+    bool isSymmetric(TreeNode* root) {
+        return check(root->left,root->right);
+    }
 };
