@@ -13,8 +13,8 @@ class Solution {
 public:
     int getLeftH(TreeNode* root){
         if(!root) return 0;
-        int i=1;
-        while(root->left) {
+        int i=0;
+        while(root) {
             i++;
             root=root->left;
         }
@@ -22,8 +22,8 @@ public:
     }
     int getRightH(TreeNode* root) {
         if(!root) return 0;
-        int i=1;
-        while(root->right) {
+        int i=0;
+        while(root) {
             i++;
             root=root->right;
         }
