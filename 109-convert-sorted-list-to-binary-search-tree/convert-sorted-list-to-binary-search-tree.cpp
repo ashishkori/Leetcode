@@ -26,10 +26,8 @@ public:
         if(!head->next)
             return new TreeNode(head->val);
         ListNode* prev=nullptr;
-        //ListNode* mid = findMid(head,prev);
         ListNode* slow=head;
         ListNode* fast=head;
-       // ListNode* curr=root;
         while(fast && fast->next) {
             prev=slow;
             slow=slow->next;
