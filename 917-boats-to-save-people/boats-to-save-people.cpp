@@ -10,16 +10,12 @@ public:
                 count++;
                 i++;
                 j--;
-            } else if(people[j]<=limit) {
-                count++;
-                j--;
             } 
             else {
                 count++;
-                i++;
+                j--;
             }
         }
-       // count+=(j-i+1);
         return count;
     }
 };
