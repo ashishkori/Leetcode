@@ -31,6 +31,6 @@ public:
 
     ListNode* insertGreatestCommonDivisors(ListNode* head) {
         
-        return 0?insertGreatestCommonDivisors1(head):insertGreatestCommonDivisorsRec(head);
+        return 1?insertGreatestCommonDivisors1(head):insertGreatestCommonDivisorsRec(head);
     }
 };
