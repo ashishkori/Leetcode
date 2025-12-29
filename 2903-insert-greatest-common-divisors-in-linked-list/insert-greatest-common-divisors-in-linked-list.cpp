@@ -10,9 +10,8 @@
  */
 class Solution {
 public:
-    ListNode* insertGreatestCommonDivisors(ListNode* head) {
+    ListNode* insertGreatestCommonDivisors1(ListNode* head) {
         ListNode* curr=head;
-
         while(curr->next) {
             ListNode* nextNode=curr->next;
             curr->next=new ListNode(__gcd(curr->val,nextNode->val));
@@ -20,5 +19,18 @@ public:
             curr=nextNode;
         }
         return head;
+    }
+    ListNode* insertGreatestCommonDivisorsRec(ListNode* head) {
+        if(!head || !head->next) return head;
+        ListNode* node=new ListNode(__gcd(head->val,head->next->val));
+        ListNode *prev=insertGreatestCommonDivisorsRec(head->next);
+        head->next=node;
+        head->next->next=prev;
+        return head;
+    };
+
+    ListNode* insertGreatestCommonDivisors(ListNode* head) {
+        
+        return 0?insertGreatestCommonDivisors1(head):insertGreatestCommonDivisorsRec(head);
     }
 };
