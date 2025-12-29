@@ -1,8 +1,9 @@
 class Solution {
 public:
     int partitionString(string s) {
-        map<char,int>mp;
-        int count=1;
+        unordered_map<char,int>mp;
+        int count=0;
+
         for(int i=0;i<s.size();i++) {
             char ch=s[i];
             if(mp.find(ch)!=mp.end()) {
@@ -13,6 +14,6 @@ public:
                  mp[ch]=i;
             }
         }
-        return count;
+        return count+1;
     }
 };
