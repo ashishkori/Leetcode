@@ -1,30 +1,35 @@
 class Solution {
 public:
     int longestPalindrome(vector<string>& words) {
-        int freq[26][26]={{0}};
-        for(auto& w: words){
-            const int i=w[0]-'a', j=w[1]-'a';
-            freq[i][j]++;
+        map<string,int>mp;
+        for(auto x:words) {
+            mp[x]++;
         }
-        int pal=0;
-        bool hasDouble=0;
-        for(int i=0; i<26; i++){
-            const int fi=freq[i][i];
-            pal+=fi/2*4;
-            if (hasDouble==0 && (fi&1)==1)
-                hasDouble=1;
+        //string s="";
+        int length=0;
+        bool centerUsed=false;
+        for(auto x:words) {
+            string rev=x;
+            reverse(rev.begin(),rev.end());
+            if(rev!=x) {
+                if(mp[x]>0 && mp[rev]>0) {
+                    mp[x]--;
+                    mp[rev]--;
+                    length+=4;
+                }
+                
+            } else if(rev==x && mp[x]>=2) {
+                if(mp[x]>=2) {
+                    mp[x]-=2;
+                    length+=4;
+                }
+                
+            } else if(!centerUsed && rev==x && mp[x]!=0) {
+                 mp[x]--;
+                 length+=2;
+                 centerUsed=true;
+            }
         }
-        pal+=hasDouble*2;
-        for(int i=0; i<26; i++)
-            for(int j=i+1; j<26; j++)
-                pal+=min(freq[i][j], freq[j][i])*4;
-        return pal;
+        return length;
     }
 };
-
-auto init = []() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
-    return 'c';
-}();
