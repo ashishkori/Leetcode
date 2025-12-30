@@ -10,7 +10,7 @@ public:
                 else bcount++;
             }
         }
-        if(acount==bcount) false;
+        //if(acount==bcount) false;
         
         return acount>bcount;
     }
