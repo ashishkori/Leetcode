@@ -1,18 +1,52 @@
 class Solution {
 public:
-    int candy(vector<int>& ratings, int cnt = 0) {
-        int n = ratings.size();
-        vector<int> candies(n, 1);
-
-        for (int i = 1; i < n; i++) 
-            if (ratings[i] > ratings[i - 1])
-                candies[i] = candies[i - 1] + 1;
-        
-        for (int i = n - 1; i > 0; i--) {
-            if (ratings[i - 1] > ratings[i])
-                candies[i - 1] = max(candies[i] + 1, candies[i - 1]);
-            cnt += candies[i - 1];
+    int  candy1(vector<int>& ratings) {
+        int n=ratings.size();
+        vector<int>L2R(n,1);
+        vector<int>R2L(n,1);
+        for(int i=1;i<n;i++) {
+            if(ratings[i]>ratings[i-1]){
+                L2R[i]=max(L2R[i],L2R[i-1]+1);
+            }
         }
-        return cnt + candies[n - 1];
+
+        for(int i=n-2;i>=0;i--) {
+            if(ratings[i]>ratings[i+1]){
+                R2L[i]=max(R2L[i],R2L[i+1]+1);
+            }
+        }
+        int res=0;
+        for(int i=0;i<n;i++) {
+            res+=max(L2R[i],R2L[i]);
+        }
+        return res;
+    }
+
+    int  candy2(vector<int>& ratings) {
+        int n=ratings.size();
+        vector<int>count(n,1);
+       
+        for(int i=1;i<n;i++) {
+            if(ratings[i]>ratings[i-1]){
+                count[i]=max(count[i],count[i-1]+1);
+            }
+        }
+
+        for(int i=n-2;i>=0;i--) {
+            if(ratings[i]>ratings[i+1]){
+                count[i]=max(count[i],count[i+1]+1);
+            }
+        }
+        int res=0;
+        for(int i=0;i<n;i++) {
+            res+=count[i];
+        }
+        return res;
+    }
+
+
+    int candy(vector<int>& ratings) {
+       
+       return 0?candy1(ratings):candy2(ratings);
     }
 };
