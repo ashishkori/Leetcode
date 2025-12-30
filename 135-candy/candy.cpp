@@ -1,5 +1,30 @@
 class Solution {
 public:
+int  candy3(vector<int>& ratings) {
+        int n=ratings.size();
+        int res =n;
+        int i=1;
+        while(i<n) {
+            if(ratings[i]==ratings[i-1]) { 
+                i++;
+                continue;
+            }
+            int peak=0;
+            while(i<n && ratings[i]>ratings[i-1]) {
+                peak++;
+                res+=peak;
+                i++;
+            }
+            int dip=0;
+            while(i<n && ratings[i]<ratings[i-1]) {
+                dip++;
+                res+=dip;
+                i++;
+            }
+            res-=min(dip,peak);
+        }
+        return res;
+    }
     int  candy1(vector<int>& ratings) {
         int n=ratings.size();
         vector<int>L2R(n,1);
@@ -47,6 +72,6 @@ public:
 
     int candy(vector<int>& ratings) {
        
-       return 0?candy1(ratings):candy2(ratings);
+       return 0?candy1(ratings):(0?candy2(ratings):candy3(ratings));
     }
 };
