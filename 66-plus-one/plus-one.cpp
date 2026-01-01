@@ -10,9 +10,9 @@ public:
             carry=num/10;
             i--;
         }
-        vector<int> res;
-        if(carry) res.push_back(carry);
-        for(auto x:digits) res.push_back(x);
-        return res;
+        
+        if(carry) digits.insert(digits.begin(), 1);;
+       
+        return digits;
     }
 };
