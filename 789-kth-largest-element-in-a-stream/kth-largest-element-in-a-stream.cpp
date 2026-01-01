@@ -6,8 +6,8 @@ public:
         K=k;
         for(auto x:nums) {
             pq.push(x);
+            if(pq.size()>k) pq.pop();
         }
-        while(pq.size()>k) pq.pop();
     }
     
     int add(int val) {
