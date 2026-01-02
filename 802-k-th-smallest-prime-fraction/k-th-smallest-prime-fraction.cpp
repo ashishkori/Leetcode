@@ -5,8 +5,7 @@ public:
         priority_queue<V,vector<V>,greater<V>> pq;
         int n=arr.size();
         for(int i=0;i<arr.size()-1;i++) {
-            vector<double> tmp={1.0*arr[i]/arr[n-1],1.0*i,(double)(n-1)};
-            pq.push(tmp);
+            pq.push({1.0*arr[i]/arr[n-1],1.0*i,(double)(n-1)});
         }
         int smallest=1;
         vector<int>res;
@@ -15,8 +14,8 @@ public:
             pq.pop();
             int i=tmp[1];
             int j=tmp[2]-1;
-            vector<double> tmp1={1.0*arr[i]/arr[j],1.0*i,1.0*j};
-            pq.push(tmp1);
+            //vector<double> tmp1={1.0*arr[i]/arr[j],1.0*i,1.0*j};
+            pq.push({1.0*arr[i]/arr[j],1.0*i,1.0*j});
             smallest++;
         }
         res.push_back(arr[(int)pq.top()[1]]);
