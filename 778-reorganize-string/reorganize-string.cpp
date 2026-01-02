@@ -1,33 +1,38 @@
 class Solution {
 public:
+    typedef pair<int,char> P;
+    struct lambda {
+        bool operator()(P& p1, P& p2) { 
+            return p1.first<p2.first;
+        }
+    };
     string reorganizeString(string s) {
-        vector<int> hash(26,0);
-        int max=0;
-        char ch;
-        for(char x:s) {
-            hash[x-'a']++;
-            if(hash[x-'a']>=max) {
-                max = hash[x-'a'];
-                ch=x;
-            }
-        }
-        if (2*max-1>s.size()) return "";
-        int idx=0;
-        vector<char> res(s.size());
-        for(int i=0;i<hash[ch-'a'];i++) {
-            res[idx]=ch;
-            idx+=2;
-        }
-        hash[ch-'a']=0;
-        for(int i=0;i<26;i++) {
-            while(hash[i]!=0) {
-            if(idx>=s.size()) idx=1;
-                res[idx]='a'+i;
-                hash[i]--;
-                idx+=2;
-            }
-        }
-        string result(res.begin(),res.end());
-        return result;
+       priority_queue<P,vector<P>,lambda> pq;
+       string res="";
+       map<char, int> mp;
+       for(char ch:s){
+        mp[ch]++;
+       }
+       int n=s.size();
+       for(auto &it:mp) {
+            if(it.second>(n+1)/2) return res;
+            pq.push({it.second,it.first});
+       }
+       while(!pq.empty()) {
+         auto tmp=pq.top();
+         res+=tmp.second;
+         pq.pop();
+         if(pq.empty()) break;
+         auto tmp2=pq.top();
+         res+=tmp2.second;
+         pq.pop();
+         if(tmp.first>1) {
+            pq.push({tmp.first-1,tmp.second});
+         }
+        if(tmp2.first>1) {
+            pq.push({tmp2.first-1,tmp2.second});
+         }
+       }
+       return res;
     }
 };
