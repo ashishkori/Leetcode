@@ -28,7 +28,6 @@ public:
         string right=tree2str(root->right);
         if(left.empty() && right.empty()) {
             
-
         } else if(left.empty()) {
             res=res+"()"+"("+right+")";
         } else if(right.empty()) {
