@@ -24,7 +24,7 @@ public:
         return s;
     }
     string deleteS(string s, string& sub){
-        return 0?deleteS1(s, sub):deleteS2(s, sub);
+        return 1?deleteS1(s, sub):deleteS2(s, sub);
     }
     int maximumGain(string s, int x, int y) {
         string maxStr=(x>y)?"ab":"ba";
