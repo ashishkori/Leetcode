@@ -35,6 +35,6 @@ public:
         return res;
     }
     vector<int> dailyTemperatures(vector<int>& temperatures) {
-        return 0?dailyTemperatures1(temperatures):dailyTemperatures2(temperatures);
+        return 1?dailyTemperatures1(temperatures):dailyTemperatures2(temperatures);
     }
 };
