@@ -1,44 +1,39 @@
 class Solution {
 public:
-    int maximumGain(string s, int x, int y) {
-        int totalPoints = 0;
-
-        if (x > y) {
-            // Remove "ab" first (higher points), then "ba"
-            totalPoints += removeSubstring(s, "ab", x);
-            totalPoints += removeSubstring(s, "ba", y);
-        } else {
-            // Remove "ba" first (higher or equal points), then "ab"
-            totalPoints += removeSubstring(s, "ba", y);
-            totalPoints += removeSubstring(s, "ab", x);
+    string deleteS2(string s, string& sub){
+        string res="";
+        stack<char> st;
+        for(int i=0;i<s.size();i++) {
+            if(!res.empty() && res.back()==sub[0] && s[i]==sub[1]){
+                res.pop_back();
+            } else res.push_back(s[i]);
         }
-
-        return totalPoints;
+        return res;
     }
-
-    int removeSubstring(string& inputString, string targetSubstring,
-                        int pointsPerRemoval) {
-        int totalPoints = 0;
-        int writeIndex = 0;
-
-        // Iterate through the string
-        for (int readIndex = 0; readIndex < inputString.size(); readIndex++) {
-            // Add the current character
-            inputString[writeIndex++] = inputString[readIndex];
-
-            // Check if we've written at least two characters and
-            // they match the target substring
-            if (writeIndex > 1 &&
-                inputString[writeIndex - 2] == targetSubstring[0] &&
-                inputString[writeIndex - 1] == targetSubstring[1]) {
-                writeIndex -= 2;  // Move write index back to remove the match
-                totalPoints += pointsPerRemoval;
+     string deleteS1(string s, string& sub){
+        int i=0;
+        for(int j=0;j<s.size();j++) {
+            s[i]=s[j];
+            i++;
+            if(i>=2 && s[i-2]==sub[0] && s[i-1]==sub[1]) {
+                i-=2;
             }
+            
         }
+        s.erase(s.begin()+i,s.end());
+        return s;
+    }
+    string deleteS(string s, string& sub){
+        return 0?deleteS1(s, sub):deleteS2(s, sub);
+    }
+    int maximumGain(string s, int x, int y) {
+        string maxStr=(x>y)?"ab":"ba";
+        string minStr=(maxStr=="ba")?"ab":"ba";
 
-        // Trim the string to remove any leftover characters
-        inputString.erase(inputString.begin() + writeIndex, inputString.end());
+        string tmp1=deleteS(s,maxStr);
 
-        return totalPoints;
+        string tmp2=deleteS(tmp1, minStr);
+        int res=(((s.size()-tmp1.size())/2)*max(x,y))+(((tmp1.size()-tmp2.size())/2)*min(x,y));
+        return res;
     }
 };
