@@ -8,8 +8,7 @@ public:
                 if(s[i]=='(') {
                     open.push(i);
                 }else {
-                    if(open.empty() && openClosed.empty()) return false;
-                    else if(!open.empty()) open.pop();
+                    if(!open.empty()) open.pop();
                     else if(!openClosed.empty()) openClosed.pop();   
                     else return false;
                 }
@@ -21,7 +20,6 @@ public:
                 openClosed.pop();
                 open.pop();
         }
-        cout<<"Size: "<<open.size()<<" empty "<<open.empty()<<endl;
         return open.empty()?true:false;
     }
 };
