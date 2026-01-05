@@ -1,6 +1,23 @@
 class Solution {
 public:
-    bool canBeValid(string s, string locked) {
+    bool canBeValid2(string s, string locked) { 
+        if(s.size()&1) return false;
+        int count=0;
+        int n=s.size();
+        for(int i=0;i<n;i++) {
+            if(s[i]=='('||locked[i]=='0') count++;
+            else count--;
+            if(count<0) return false; 
+        }
+        count=0;
+        for(int i=n-1;i>=0;i--) {
+            if(s[i]==')'||locked[i]=='0') count++;
+            else count--;
+            if(count<0) return false;       
+        }
+        return true;
+    }
+    bool canBeValid1(string s, string locked) {
         stack<int> open, openClosed;
         if(s.size()&1) return false;
         for(int i=0;i<s.size();i++) {
@@ -22,4 +39,8 @@ public:
         }
         return open.empty()?true:false;
     }
+
+     bool canBeValid(string s, string locked) { 
+        return 0?canBeValid1(s,locked):canBeValid2(s,locked);
+     }
 };
