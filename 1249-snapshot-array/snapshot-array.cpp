@@ -1,18 +1,18 @@
 class SnapshotArray {
 public:
-    vector<vector<pair<int,int>>> sp;
+    unordered_map<int,vector<pair<int,int>>> sp;
     int n;
     int id;
     SnapshotArray(int length) {
         n=length;
         id=0;
-        sp.resize(n);
         for(int i=0;i<n;i++) {
-            sp[i].push_back(make_pair(id,0));
+            sp[i].push_back({0,0});
         }
     }
     
     void set(int index, int val) {
+        if(index>n) return;
         sp[index].push_back({id,val});
     }
     
@@ -21,8 +21,11 @@ public:
     }
     
     int get(int index, int snap_id) {
-        auto it=upper_bound(sp[index].begin(),sp[index].end(),make_pair(snap_id,INT_MAX));
-        return prev(it)->second;
+        vector<pair<int,int>> &vec=sp[index];
+        pair<int,int> p={snap_id,INT_MAX};
+        auto itr=upper_bound(vec.begin(),vec.end(),p);
+        itr--;
+        return itr->second;
     }
 };
 
