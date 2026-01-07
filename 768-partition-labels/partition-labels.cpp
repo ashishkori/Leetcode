@@ -12,15 +12,15 @@ public:
         vector<int> res;
         while(i<s.size()) {
             if(i>j) {
-                res.push_back(count);
-               // start=i;
-               count=0;
+                res.push_back(i-start);
+                start=i;
+               //count=0;
             }
             count++;
             j=max(j,mp[s[i]]);
             i++;
         }
-        if(count>0) res.push_back(count); 
+        if(start<i) res.push_back(i-start); 
         return res;
     }
 };
