@@ -1,30 +1,27 @@
 class Solution {
 public:
-    void dfs(map<int,vector<int>>& mp, int s, vector<bool>& visit){
-        visit[s]=true;
-        for(auto &v:mp[s]){
-            if(!visit[v]) dfs(mp,v,visit);
+    void dfs(vector<vector<int>>& isConnected, vector<bool>& visited, int i) {
+        if (visited[i]) return;  // Already visited
+        visited[i] = true;
+        int n = isConnected.size();
+        for (int j = 0; j < n; j++) {
+            if (isConnected[i][j]) {
+                dfs(isConnected, visited, j);
+            }
         }
     }
+
     int findCircleNum(vector<vector<int>>& isConnected) {
-        int n=isConnected.size();
-        map<int,vector<int>> mp;
-        for(int i=0;i<isConnected.size();i++){
-            for(int j=0;j<isConnected[i].size();j++){
-                if(isConnected[i][j]) {
-                    mp[i].push_back(j);
-                    mp[j].push_back(i);
-                }
+        int n = isConnected.size();
+        vector<bool> visited(n, false);
+        int ans = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (!visited[i]) {
+                ans++;  // New province found
+                dfs(isConnected, visited, i);
             }
         }
-        int count=0;
-        vector<bool> visit(n,false);
-        for(int i=0;i<isConnected.size();i++) {
-            if(!visit[i]){
-                count++;
-                dfs(mp,i,visit);
-            }
-        }
-        return count;
+        return ans;
     }
 };
