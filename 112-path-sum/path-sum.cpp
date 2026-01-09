@@ -7,6 +7,7 @@ public:
         sum+=root->val;
         if(!root->left && !root->right) {
             if(target==sum) return true;
+            else return false;
         }
         bool l=solve(root->left,target,sum);
         bool r=solve(root->right,target,sum);
